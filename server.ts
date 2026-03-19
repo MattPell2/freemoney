@@ -5,13 +5,13 @@ export default class ViewerCounter implements Party.Server {
 
   onConnect(conn: Party.Connection) {
     const count = [...this.room.getConnections()].length;
-    this.room.broadcast(JSON.stringify({ count }));
+    this.room.broadcast(JSON.stringify({ type: "count", count }));
   }
 
   onClose(conn: Party.Connection) {
     setTimeout(() => {
       const count = [...this.room.getConnections()].length;
-      this.room.broadcast(JSON.stringify({ count }));
+      this.room.broadcast(JSON.stringify({ type: "count", count }));
     }, 100);
   }
 }
